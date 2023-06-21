@@ -31,11 +31,11 @@ contract AIOBlockchainLabNFTs is
         _setTokenURI(tokenId, uri);
     }
 
-    function mint(string memory uri) public {
+    function mint(string memory uri) external {
         safeMint(msg.sender, uri);
     }
 
-    function updateBaseURI(string calldata uri) public onlyOwner {
+    function updateBaseURI(string calldata uri) external onlyOwner {
         baseURI = uri;
     }
 

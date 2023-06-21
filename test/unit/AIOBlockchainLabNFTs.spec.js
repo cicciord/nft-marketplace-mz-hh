@@ -16,17 +16,32 @@ const { assert, expect } = require("chai");
         return { AIOBlockchainLabNFTs, owner, user };
       }
 
+      describe("#updateBaseURI", function () {
+        it("should update baseURI", async function () {
+          const uri = "http://newbaseuri/";
+
+          const { AIOBlockchainLabNFTs } = await loadFixture(deployAIOBlockchainLabNFTsFixture);
+
+          const tx = await AIOBlockchainLabNFTs.updateBaseURI(uri);
+          await tx.wait(1);
+
+          const baseURI = await AIOBlockchainLabNFTs.baseURI();
+
+          expect(baseURI).to.be.equal(uri);
+        });
+      });
+
       describe("#mint", function () {
         it("should mint an NFT and set it's uri", async function () {
-          const uri = "uristorage";
+          const uri = "tokenuri";
 
-          const { AIOBlockchainLabNFTs, user, owner } = await loadFixture(
+          const { AIOBlockchainLabNFTs, user } = await loadFixture(
             deployAIOBlockchainLabNFTsFixture
           );
           const userConnectedContract = AIOBlockchainLabNFTs.connect(user);
 
           const tx = await userConnectedContract.mint(uri);
-          console.log(await tx.wait(1));
+          await tx.wait(1);
 
           const baseURI = await AIOBlockchainLabNFTs.baseURI();
           const tokenURI = await AIOBlockchainLabNFTs.tokenURI(0);
