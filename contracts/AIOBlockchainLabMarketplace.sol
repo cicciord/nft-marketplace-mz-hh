@@ -94,7 +94,7 @@ contract AIOBlockchainLabMarketplace is ReentrancyGuard {
         IERC721 nft = IERC721(nftAddress);
 
         require(price > 0, "price cannot be zero");
-        require(nft.getApproved(tokenId) != address(this), "not approved");
+        require(nft.getApproved(tokenId) == address(this), "not approved");
 
         Listing memory listing = Listing(
             nftAddress,

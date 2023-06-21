@@ -7,10 +7,12 @@
 const { run } = require("hardhat");
 
 const { deployAIOBlockchainLabNFTs } = require("./deployAIOBlockchainLabNFTs");
+const { deployAIOBlockchainLabMarketplace } = require("./deployAIOBlockchainLabMarketplace");
 
 async function main() {
   await run("compile");
   await deployAIOBlockchainLabNFTs();
+  await deployAIOBlockchainLabMarketplace();
 }
 
 // We recommend this pattern to be able to use async/await everywhere
